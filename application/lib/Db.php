@@ -29,6 +29,13 @@ class Db {
             return $stat;
         }
 
+        // public function update($id_post, $sum_value){
+        //     $sql = "UPDATE posts_rating SET sum_value = :sum_value + $sum_value, count_rate = :count_rate + 1 WHERE id_post = $id_post";
+        //     $stat = $this->db->prepare($sql);
+        //     $stat->execute();
+        //     return true;
+        // }
+
         public function row($sql, $params = []) {
             $result = $this->query($sql, $params);
             return $result->fetchAll(PDO::FETCH_ASSOC);

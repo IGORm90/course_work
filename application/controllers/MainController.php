@@ -16,6 +16,7 @@ class MainController extends Controller{
       $vars = [
          'pagination' => $Pagination->get(),
          'list' => $this->model->postsList($this->route),
+         'recomend' => $this->model->recomendList(),
       ];
       $this->view->render('Главная страница', $vars);
    }

@@ -63,7 +63,7 @@ class AccountController extends Controller {
 		}
 		  $star = $_POST['star'];
 		  $id_user = $_SESSION['account']['id'];
-		  $id_post = $_POST['id-post'];
+		  $id_post = $_POST['id_post'];
 		  if($this->model->addRating($id_post, $id_user, $star)) {
 		  	echo "Ваша оценка сохранена.";
 		  }

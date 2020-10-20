@@ -48,8 +48,17 @@ class Admin extends Model{
             'text' => $post['text'],
             'dt' => null,
         ];
-        $this->db->query('INSERT INTO posts VALUES (:id, :name, :description, :text, :dt)', $params);
-        return $this->db->lastInsertId();
+
+        if($this->db->query('INSERT INTO posts VALUES (:id, :name, :description, :text, :dt)', $params)){
+            $last_id = $this->db->lastInsertId();
+            $params2 = [
+                'id_post' => $last_id,
+            'sum_value' => 0,
+            'count_rate' => 0,
+            ];
+            $this->db->query('INSERT INTO posts_rating VALUES (:id_post, :sum_value, :count_rate)', $params2);
+        }
+        return $last_id;
     }
 
     public function postEdit($post, $id){

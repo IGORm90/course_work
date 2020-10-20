@@ -78,11 +78,17 @@ class Account extends Model {
 
 	public function addRating($id_post, $id_user, $rating){
 		$params = [
+			'id' => '',
 			'id_post' => (int)$id_post,
 			'id_user' => (int)$id_user,
 			'rating' => (int)$rating,
 		];
-		$this->db->query('INSERT INTO rating_post VALUES (:id_post, :id_user, :rating)', $params);
+		$this->db->query('INSERT INTO rating_post VALUES (:id, :id_post, :id_user, :rating)', $params);		
+		$nextParams = [
+			'id_post' => $params['id_post'],
+			'sum_value' => $params['rating'],
+		];
+		$this->db->query('UPDATE posts_rating SET sum_value = sum_value + :sum_value, count_rate = count_rate + 1  WHERE id_post = :id_post', $nextParams);
 		return true;
 	}
 

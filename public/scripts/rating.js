@@ -1,7 +1,7 @@
 $("#btn-rate").on("click", function() {
     var star = $("input:checked").val();
     var id_post = document.URL;
-    id_post = parseInt(id_post[id_post.length - 1]);
+    id_post = parseInt(id_post.substr(31));
 
     if (star == undefined) {
         alert("оценка не выбрана");
@@ -13,7 +13,7 @@ $("#btn-rate").on("click", function() {
         cache: false,
         data: {
             'star': star,
-            'id-post': id_post,
+            'id_post': id_post,
         },
         dataType: 'html',
         beforeSend: function() {
